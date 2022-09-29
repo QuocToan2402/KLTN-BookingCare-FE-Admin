@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-constructor */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
@@ -17,8 +18,19 @@ class Login extends Component {
 	//Khai bao state
 	constructor(props) {
 		super(props);
-		this.btnLogin = React.createRef();
+		//this.btnLogin = React.createRef();
+		this.state = {
+			username: '',
+			password: '',
+		};
 	}
+	HandleOnChangeUsername = (event) => {
+		this.setState({ username: event.target.value });
+	};
+	HandleOnChangePassword = (e) => {
+		this.setState({ password: e.target.value });
+	};
+	HandleLogin = () => {};
 
 	render() {
 		return (
@@ -28,14 +40,33 @@ class Login extends Component {
 						<div className='col-12 header-title'>SIGN IN</div>
 						<div className='col-12 form-group login-input'>
 							<label className='input-title'>Username</label>
-							<input placeholder='Enter your username' type='text' className='form-control' />
+							<input
+								placeholder='Enter your username'
+								type='text'
+								className='form-control form-input'
+								value={this.state.username}
+								onChange={(event) => this.HandleOnChangeUsername(event)}
+							/>
 						</div>
 						<div className='col-12 form-group login-input'>
 							<label className='input-title'>Password</label>
-							<input placeholder='Enter your password' type='password' className='form-control' />
+							<input
+								placeholder='Enter your password'
+								type='password'
+								className='form-control form-input'
+								value={this.state.password}
+								onChange={(event) => this.HandleOnChangePassword(event)}
+							/>
 						</div>
 						<div className='col-12 btn-row'>
-							<button className='btn-login'>Login</button>
+							<button
+								className='btn-login'
+								onClick={() => {
+									this.HandleLogin();
+								}}
+							>
+								Login
+							</button>
 							<a className='forgot-title'>Forgot your password?</a>
 						</div>
 						<div className='col-12'>
