@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-useless-constructor */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -14,6 +15,8 @@ import './Login.scss';
 
 import adminService from '../services/adminService';
  */
+import { HandleLoginApi } from '../../services/userService';
+
 class Login extends Component {
 	//Khai bao state
 	constructor(props) {
@@ -30,7 +33,13 @@ class Login extends Component {
 	HandleOnChangePassword = (e) => {
 		this.setState({ password: e.target.value });
 	};
-	HandleLogin = () => {};
+	HandleLogin = async () => {
+		try {
+			await HandleLoginApi(this.state.username, this.state.password);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	render() {
 		return (
